@@ -1,0 +1,40 @@
+server:
+  port: 8001
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/cloudDB01
+  application:
+    name: microservicecloud-dept
+
+#通用mapper的配置
+mapper:
+  mappers: com.offcn.mapper
+  identity: mysql
+  not-empty: false
+
+logging:
+  level:
+     com.offcn.springcloud.mapper : debug
+
+eureka:
+  client:
+    service-url:
+      #单机 defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      #设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址（单机）。
+      defaultZone : http://localhost:7001/eureka,http://localhost:7002/eureka/
+  instance:
+    #自定义服务名称信息
+    instance-id: microservicecloud-dept8001-hystrix
+    #访问路径可以显示IP地址
+    prefer-ip-address: true
+
+
+info:
+  app.name: offcn-microservicecloud
+  company.name: www.offcn.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
